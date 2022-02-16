@@ -3,9 +3,9 @@ import MyButton from "./UI/MyButton/MyButton";
 import {useDispatch} from "react-redux";
 import {deleteItem} from "../store/reducers/ListReducer";
 import MyModal from "./UI/MyModal/MyModal";
+import DeleteWarning from "./DeleteWarning";
 
 const Item = (props) => {
-    const dispatch = useDispatch()
     const [deleteVisible, setDeleteVisible] = useState(false)
     return (
         <div className="item">
@@ -22,13 +22,7 @@ const Item = (props) => {
                 <MyButton style={{width: "100%"}} onClick={() => setDeleteVisible(true)}>
                     Delete
                 </MyButton>
-                <MyModal visible={deleteVisible} setVisible={setDeleteVisible}>
-                    <div>Are you realy want to delete this notation?</div>
-                    <MyButton onClick={() => {
-                        dispatch(deleteItem(props.id))
-                        setDeleteVisible(false)
-                    }}>Delete</MyButton>
-                </MyModal>
+                <DeleteWarning visible={deleteVisible} setVisible={setDeleteVisible} id={props.id}/>
             </div>
         </div>
     );
