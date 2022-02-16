@@ -1,28 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    list: [
-        {
-            id: 1,
-            title: 'fdsgdfgdfgdfhfghg',
-            body: 'dfhfghfghf'
-        },
-        {
-            id: 2,
-            title: 'kahdgfgak,duakda.id',
-            body: 'rrrrrrrrrrrrrr rrrrrrrrrrrrrr rrrrrrrrrrrrrrrrduadhaliudkegfkueyf'
-        },
-        {
-            id: 3,
-            title: 'kahdgfgak,duakda.id',
-            body: 'rrrrrrrrrrrrrr rrrrrrrrrrrrrr rrrrrrrrrrrrrrrrduadhaliudkegfkueyf'
-        },
-        {
-            id: 4,
-            title: 'kahdgfgak,duakda.id',
-            body: 'rrrrrrrrrrrrrr rrrrrrrrrrrrrr rrrrrrrrrrrrrrrrduadhaliudkegfkueyf'
-        }
-    ]
+    list: [],
+
 }
 export const listSlice = createSlice({
     name: "list",
@@ -31,9 +11,12 @@ export const listSlice = createSlice({
         deleteItem(state, action){
             state.list = state.list.filter(el => el.id !== action.payload)
         },
+        createItem(state, action){
+            state.list.push(action.payload)
+        },
     }
 })
 
-export const {deleteItem} = listSlice.actions
+export const {deleteItem, createItem} = listSlice.actions
 
 export default listSlice.reducer
