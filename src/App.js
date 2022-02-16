@@ -1,6 +1,5 @@
 import './App.css';
-import Count from "./components/Count";
-import { Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Main from "./components/Main";
 import Edit from "./components/Edit";
 

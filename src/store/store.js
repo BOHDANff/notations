@@ -10,11 +10,11 @@ import {
     REGISTER,
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import testReducer from "./reducers/TestReducer";
+import listReducer from "./reducers/ListReducer";
 
 
 const rootReducer = combineReducers({
-    test: testReducer
+    list: listReducer
 })
 const persistConfig = {
     key: 'root',
