@@ -8,7 +8,6 @@ import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
 import {createItem} from "../../store/reducers/ListReducer";
 import {useDispatch} from "react-redux";
 import {useParams} from "react-router-dom";
-import MyButton from "../UI/MyButton/MyButton";
 
 function EditForm(props) {
     const schema = yup.object().shape({
@@ -29,7 +28,7 @@ function EditForm(props) {
         props.setVisible(false)
     }
     const dispatch = useDispatch()
-    let params = useParams()
+    const params = useParams()
     return (
         <>
             <h1>Edit this notation</h1>
@@ -41,7 +40,6 @@ function EditForm(props) {
                     label={'Label of notation'}
                     error={!!errors.title}
                     helperText={errors?.title?.message}
-                    value={params.id}
                 />
                 <MyInput
                     {...register('body')}

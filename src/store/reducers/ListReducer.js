@@ -9,7 +9,9 @@ export const listSlice = createSlice({
     initialState,
     reducers: {
         deleteItem(state, action){
-            state.list = state.list.filter(el => el.id !== action.payload)
+            state.list = state.list.filter(el => el.id != action.payload)
+            // I use not strict comparison !== because id in payload
+            // could be string when I take it from query params
         },
         createItem(state, action){
             state.list.push(action.payload)
