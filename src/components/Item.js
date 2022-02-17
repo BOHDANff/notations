@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import MyButton from "./UI/MyButton/MyButton";
-import {useDispatch} from "react-redux";
-import {deleteItem} from "../store/reducers/ListReducer";
-import MyModal from "./UI/MyModal/MyModal";
-import DeleteWarning from "./DeleteWarning";
+import DeleteWarning from "./Warnings/DeleteWarning";
+import { useNavigate } from "react-router-dom";
 
 const Item = (props) => {
     const [deleteVisible, setDeleteVisible] = useState(false)
+    let navigate = useNavigate()
     return (
         <div className="item">
             <div className="item__content">
@@ -16,8 +15,8 @@ const Item = (props) => {
                 </div>
             </div>
             <div className="item__btns">
-                <MyButton style={{width: "100%", marginBottom: "10px"}}>
-                    Open
+                <MyButton style={{width: "100%", marginBottom: "10px"}} onClick={() => navigate(`/edit/${props.id}`)}>
+                    Edit
                 </MyButton>
                 <MyButton style={{width: "100%"}} onClick={() => setDeleteVisible(true)}>
                     Delete

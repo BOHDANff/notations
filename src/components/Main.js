@@ -9,13 +9,13 @@ function Main(props) {
     const dispatch = useDispatch()
     const [createVisible, setCreateVisible] = useState(false)
     return (
-        <div className="main">
+        <>
             <MyButton onClick={() => setCreateVisible(true)}>Add notation</MyButton>
             <Create visible={createVisible} setVisible={setCreateVisible}/>
             {list.map((el, i) => (
                 <Item title={el.title} body={el.body} id={el.id} key={i}/>
             ))}
-        </div>
+        </>
     );
 }
 

@@ -5,12 +5,14 @@ import Edit from "./components/Edit";
 
 function App() {
   return (
-    <div className="App">
-        <Routes>
-            <Route path="/" element={<Main/>} />
-            <Route path="/edit" element={<Edit/>} />
-        </Routes>
-    </div>
+      <div className="App">
+          <div className="main">
+              <Routes>
+                  <Route path="/" element={<Main/>}/>
+                  <Route path="/edit/:id" element={<Edit/>}/>
+              </Routes>
+          </div>
+      </div>
   );
 }
 
