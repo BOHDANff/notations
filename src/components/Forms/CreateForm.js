@@ -22,7 +22,7 @@ function CreateForm(props) {
         resolver: yupResolver(schema),
     })
     const onSubmit = (notat) => {
-        dispatch(createItem({...notat, id: Date.now()}))
+        dispatch(createItem({...notat, id: String(Date.now())}))
         reset()
         props.setVisible(false)
     }

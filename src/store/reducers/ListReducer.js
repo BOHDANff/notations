@@ -9,16 +9,18 @@ export const listSlice = createSlice({
     initialState,
     reducers: {
         deleteItem(state, action){
-            state.list = state.list.filter(el => el.id != action.payload)
-            // I use not strict comparison !== because id in payload
-            // could be string when I take it from query params
+            state.list = state.list.filter(el => el.id !== action.payload)
         },
         createItem(state, action){
             state.list.push(action.payload)
         },
+        editItem(state, action){
+           let index = state.list.findIndex(el => el.id === action.payload.id)
+            state.list[index] = action.payload
+        },
     }
 })
 
-export const {deleteItem, createItem} = listSlice.actions
+export const {deleteItem, createItem, editItem} = listSlice.actions
 
 export default listSlice.reducer

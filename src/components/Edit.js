@@ -4,14 +4,16 @@ import { useParams } from "react-router-dom";
 import MyButton from "./UI/MyButton/MyButton";
 import DeleteWarning from "./Warnings/DeleteWarning";
 import CancelWarning from "./Warnings/CancelWarning";
+import {useSelector} from "react-redux";
 
 function Edit(props) {
     const [cancelWarning, setCancelWarning] = useState(false)
     const [deleteWarning, setDeleteWarning] = useState(false)
     const params = useParams()
+    const notation = useSelector(state => state.list.list.find(item => item.id === params.id))
     return (
         <>
-            <EditForm/>
+            <EditForm title={notation.title} body={notation.body} id={params.id}/>
             <CancelWarning
                 visible={cancelWarning}
                 setVisible={setCancelWarning}/>

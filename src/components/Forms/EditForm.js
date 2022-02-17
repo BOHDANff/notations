@@ -1,13 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {MyForm} from "../UI/MyForm/MyForm";
 import {MyInput} from "../UI/MyInput/MyInput";
 import {MyFormButton} from "../UI/MyFormButton/MyFormButton";
 import * as yup from "yup";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup/dist/yup";
-import {createItem} from "../../store/reducers/ListReducer";
-import {useDispatch} from "react-redux";
-import {useParams} from "react-router-dom";
+import SaveWarning from "../Warnings/SaveWarning";
 
 function EditForm(props) {
     const schema = yup.object().shape({
@@ -22,15 +20,18 @@ function EditForm(props) {
         mode: "onChange",
         resolver: yupResolver(schema),
     })
-    const onSubmit = (notat) => {
-        dispatch(createItem({...notat, id: Date.now()}))
+    const [saveWarning, setSaveWarning] = useState(false)
+    const [titleValue, setTitleValue] = useState(props.title)
+    const [bodyValue, setBodyValue] = useState(props.body)
+    const onSubmit = (editedNotat) => {
         reset()
-        props.setVisible(false)
+        setSaveWarning(true)
     }
-    const dispatch = useDispatch()
-    const params = useParams()
     return (
         <>
+            <SaveWarning visible={saveWarning}
+                         setVisible={setSaveWarning}
+                         editedNotation={{title: titleValue, body: bodyValue, id: props.id}}/>
             <h1>Edit this notation</h1>
             <MyForm onSubmit={handleSubmit(onSubmit)}>
                 <MyInput
@@ -40,6 +41,8 @@ function EditForm(props) {
                     label={'Label of notation'}
                     error={!!errors.title}
                     helperText={errors?.title?.message}
+                    value={titleValue}
+                    onChange={e => setTitleValue(e.target.value)}
                 />
                 <MyInput
                     {...register('body')}
@@ -50,6 +53,8 @@ function EditForm(props) {
                     rows={4}
                     error={!!errors.body}
                     helperText={errors?.body?.message}
+                    value={bodyValue}
+                    onChange={e => setBodyValue(e.target.value)}
                 />
                 <MyFormButton style={{margin: "20px 0 20px"}}>Save editions</MyFormButton>
             </MyForm>
